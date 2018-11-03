@@ -1,4 +1,35 @@
-(function($){
+function generateSearch() {
+
+  var locSearch = $(this).attr("autocomplete-input");
+  var locQueryURL = "https://www.loc.gov/books/?q=" +
+  locSearch + "fo=json";
+
+  var openSearch = $(this).attr("autocomplete-input");
+  var openQueryURL = "http://openlibrary.org/search.json?q=" +
+  openSearch;
+
+// if () {
+// }
+
+$.ajax({
+  url: locQueryURL,
+  method: "GET"
+})
+  .then(function(response) { 
+    var locResults = response.data;
+    console.log(response);
+  }
+
+  $.ajax({
+    url: openQueryURL,
+    method: "GET"
+  })
+    .then(function(response) { 
+      var openResults = response.data;
+      console.log(response);
+    }
+  
+  (function($){
   $(function(){
 
     $('.sidenav').sidenav();

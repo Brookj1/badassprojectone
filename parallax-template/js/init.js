@@ -12,9 +12,6 @@ function generateSearch() {
 
   }); // end of document ready
 })(jQuery); // end of jQuery name space
-<<<<<<< HEAD
-};
-=======
 
   // Firebase information and initialization
   var config = {
@@ -52,4 +49,3 @@ var instance = M.FormSelect.getInstance(elem);
 
 instance.getSelectedValues();
 // end drop downs
->>>>>>> 86642e9825cbec4ec8ec8b5ea808af23265d4529

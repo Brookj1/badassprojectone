@@ -17,6 +17,8 @@ var config = {
   messagingSenderId: "1092097473350"
 };
 firebase.initializeApp(config);
+
+var database = firebase.database();
 // end firebase
 
 // // event listener for the drop down search options
@@ -36,7 +38,7 @@ firebase.initializeApp(config);
 // /* jQuery Method Calls
 //   You can still use the old jQuery plugin method calls.
 //   But you won't be able to access instance properties.
- 
+
 //   $('select').formSelect('methodName');
 //   $('select').formSelect('methodName', paramName);
 // */
@@ -44,54 +46,61 @@ firebase.initializeApp(config);
 // instance.getSelectedValues();
 // // end drop downs
 
-// function generateSearch() {
+// Testing the API calls
+var locQueryURL = "https://www.loc.gov/books/?q=" +
+"Gunslinger" + "&fo=json";
 
-  // var locSearch = $(this).attr("autocomplete-input");
-  // var locQueryURL = "https://www.loc.gov/books/?q=" +
-  //   locSearch + "fo=json";
+$.ajax({
+  url: locQueryURL,
+  method: "GET"
+}).then(function (response) {
+  var locResults = response.featured_items;
+  console.log(locResults);
+  console.log(response);
+});
 
-//   var openSearch = $(this).attr("autocomplete-input");
-//   var openQueryURL = "http://openlibrary.org/search.json?q=" +
-//     openSearch;
-
-//   // if () {
-//   // }
-
-//   $.ajax({
-//     url: locQueryURL,
-//     method: "GET"
-//   }).then(function (response) {
-//     var locResults = response.data;
-//     console.log(response);
-//   });
-
-//   $.ajax({
-//     url: openQueryURL,
-//     method: "GET"
-//   }).then(function (response) {
-//     var openResults = response.data;
-//     console.log(response);
-//   });
-// }
-
-// var locQueryURL = "https://www.loc.gov/books/?q=" +
-// "Gunslinger" + "&fo=json";
+// var openQueryURL = "http://openlibrary.org/search.json?q=harry+potter";
 
 // $.ajax({
-//   url: locQueryURL,
+//   url: openQueryURL,
 //   method: "GET"
 // }).then(function (response) {
-//   var locResults = response.featured_items;
-//   console.log(locResults);
+//   // var openResults = response.data;
 //   console.log(response);
 // });
 
-var openQueryURL = "http://openlibrary.org/search.json?q=harry+potter";
+$("#submitBtn").on("click", function (event) {
+  event.preventDefault();
 
-$.ajax({
-  url: openQueryURL,
-  method: "GET"
-}).then(function (response) {
-  // var openResults = response.data;
-  console.log(response);
-});
+  var searchTerm = $("#autocomplete-input").val().trim();
+
+  database.ref().push({
+    searchTerm: searchTerm
+  })
+
+  var locQueryURL = "https://www.loc.gov/books/?q=" +
+    searchTerm + "?fo=json";
+
+  var openQueryURL = "http://openlibrary.org/search.json?q=" +
+    searchTerm;
+
+  // if () {
+  // }
+
+  $.ajax({
+    url: locQueryURL,
+    method: "GET"
+  }).then(function (response) {
+    var locResults = response.featured_items;
+    console.log(response);
+    console.log(locResults);
+  });
+
+  $.ajax({
+    url: openQueryURL,
+    method: "GET"
+  }).then(function (response) {
+    // var openResults = response.data;
+    console.log(response);
+  });
+})

@@ -18,59 +18,80 @@ var config = {
 };
 firebase.initializeApp(config);
 // end firebase
-function generateSearch() {
 
-  var locSearch = $(this).attr("autocomplete-input");
-  var locQueryURL = "https://www.loc.gov/books/?q=" +
-    locSearch + "fo=json";
+// // event listener for the drop down search options
+// document.addEventListener('DOMContentLoaded', function () {
+//   var elems = document.querySelectorAll('select');
+//   var instances = M.FormSelect.init(elems, options);
+// });
 
-  var openSearch = $(this).attr("autocomplete-input");
-  var openQueryURL = "http://openlibrary.org/search.json?q=" +
-    openSearch;
+// // Or with jQuery
 
-  // if () {
-  // }
+// $(document).ready(function () {
+//   $('select').formSelect();
+// });
 
-  $.ajax({
-    url: locQueryURL,
-    method: "GET"
-  })
-    .then(function (response) {
-      var locResults = response.data;
-      console.log(response);
-    });
+// var instance = M.FormSelect.getInstance(elem);
 
-  $.ajax({
-    url: openQueryURL,
-    method: "GET"
-  })
-    .then(function (response) {
-      var openResults = response.data;
-      console.log(response);
-    });
+// /* jQuery Method Calls
+//   You can still use the old jQuery plugin method calls.
+//   But you won't be able to access instance properties.
+ 
+//   $('select').formSelect('methodName');
+//   $('select').formSelect('methodName', paramName);
+// */
 
-  // event listener for the drop down search options
-  document.addEventListener('DOMContentLoaded', function () {
-    var elems = document.querySelectorAll('select');
-    var instances = M.FormSelect.init(elems, options);
-  });
+// instance.getSelectedValues();
+// // end drop downs
 
-  // Or with jQuery
+// function generateSearch() {
 
-  $(document).ready(function () {
-    $('select').formSelect();
-  });
+  // var locSearch = $(this).attr("autocomplete-input");
+  // var locQueryURL = "https://www.loc.gov/books/?q=" +
+  //   locSearch + "fo=json";
 
-  var instance = M.FormSelect.getInstance(elem);
+//   var openSearch = $(this).attr("autocomplete-input");
+//   var openQueryURL = "http://openlibrary.org/search.json?q=" +
+//     openSearch;
 
-  /* jQuery Method Calls
-    You can still use the old jQuery plugin method calls.
-    But you won't be able to access instance properties.
-  
-    $('select').formSelect('methodName');
-    $('select').formSelect('methodName', paramName);
-  */
+//   // if () {
+//   // }
 
-  instance.getSelectedValues();
-// end drop downs
-}
+//   $.ajax({
+//     url: locQueryURL,
+//     method: "GET"
+//   }).then(function (response) {
+//     var locResults = response.data;
+//     console.log(response);
+//   });
+
+//   $.ajax({
+//     url: openQueryURL,
+//     method: "GET"
+//   }).then(function (response) {
+//     var openResults = response.data;
+//     console.log(response);
+//   });
+// }
+
+// var locQueryURL = "https://www.loc.gov/books/?q=" +
+// "Gunslinger" + "&fo=json";
+
+// $.ajax({
+//   url: locQueryURL,
+//   method: "GET"
+// }).then(function (response) {
+//   var locResults = response.featured_items;
+//   console.log(locResults);
+//   console.log(response);
+// });
+
+var openQueryURL = "http://openlibrary.org/search.json?q=harry+potter";
+
+$.ajax({
+  url: openQueryURL,
+  method: "GET"
+}).then(function (response) {
+  // var openResults = response.data;
+  console.log(response);
+});

@@ -47,18 +47,20 @@ var database = firebase.database();
 // // end drop downs
 
 // Testing the API calls
-var locQueryURL = "https://www.loc.gov/books/?q=" +
-"Gunslinger" + "&fo=json";
+// This one is for the LoC API, this test works but when we tested it with the click event, it threw an error - not sure why
+// var locQueryURL = "https://www.loc.gov/books/?q=" +
+// "Gunslinger" + "&fo=json";
 
-$.ajax({
-  url: locQueryURL,
-  method: "GET"
-}).then(function (response) {
-  var locResults = response.featured_items;
-  console.log(locResults);
-  console.log(response);
-});
+// $.ajax({
+//   url: locQueryURL,
+//   method: "GET"
+// }).then(function (response) {
+//   var locResults = response.featured_items;
+//   console.log(locResults);
+//   console.log(response);
+// });
 
+// open library API call, this returns an object that doesn't look like it's in JSON
 // var openQueryURL = "http://openlibrary.org/search.json?q=harry+potter";
 
 // $.ajax({
@@ -69,15 +71,19 @@ $.ajax({
 //   console.log(response);
 // });
 
+//event listener for when someone hits the submit button that run ajax calls and pushes information to database
 $("#submitBtn").on("click", function (event) {
   event.preventDefault();
 
+  //pulls input from the search field and stores in a variable
   var searchTerm = $("#autocomplete-input").val().trim();
 
+  //pushes to database
   database.ref().push({
     searchTerm: searchTerm
   })
 
+  //URLs to use in ajax calls
   var locQueryURL = "https://www.loc.gov/books/?q=" +
     searchTerm + "?fo=json";
 
@@ -87,6 +93,7 @@ $("#submitBtn").on("click", function (event) {
   // if () {
   // }
 
+  //ajax calls for each API and console logging results
   $.ajax({
     url: locQueryURL,
     method: "GET"

@@ -85,7 +85,7 @@ $("#submitBtn").on("click", function (event) {
 
   //URLs to use in ajax calls
   var locQueryURL = "https://www.loc.gov/books/?q=" +
-    searchTerm + "?fo=json";
+    searchTerm + "&fo=json";
 
   var openQueryURL = "http://openlibrary.org/search.json?q=" +
     searchTerm;

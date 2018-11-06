@@ -85,10 +85,10 @@ $("#submitBtn").on("click", function (event) {
 
   //URLs to use in ajax calls
   var locQueryURL = "https://www.loc.gov/books/?q=" +
-    searchTerm + "&fo=json";
+    searchTerm + "&fo=json&c=10";
 
   var openQueryURL = "http://openlibrary.org/search.json?q=" +
-    searchTerm;
+    searchTerm + "&limit=10"
 
   // if () {
   // }
@@ -108,7 +108,38 @@ $("#submitBtn").on("click", function (event) {
     method: "GET"
   }).then(function (response) {
     // var openResults = response.data;
-    console.log(response);
+    console.log(JSON.parse(response));
+    var parseResponse = JSON.parse(response);
+    console.log(parseResponse.docs);
+
+    var results = parseResponse.docs;
+    for (var i = 0; i < results.length; i++) {
+      var newRow = $("<tr>")
+
+      var cover = "https://covers.openlibrary.org/b/olid/" + results[i].cover_edition_key + ".jpg";
+      var tdCover = $("<img>").attr("src", cover).css({"width": "150px", "height": "200px"});
+      newRow.append(tdCover);
+
+      var title = results[i].title;
+      var tdTitle = $("<td>").text(title);
+      // console.log("title", title);
+      newRow.append(tdTitle);
+
+      var author = results[i].author_name;
+      var tdAuthor = $("<td>").text(author);
+      console.log = ("author", author);
+      newRow.append(tdAuthor);
+
+      var pubDate = results[i].publish_year;
+      var tdPubDate = $("<td>").text(pubDate);
+      console.log = ("pubDate", pubDate);
+      newRow.append(tdPubDate);
+
+      $("tbody").append(newRow);
+      $("tbody").append(tdCover);
+      $("tbody").append(tdTitle);
+      $("tbody").append(tdAuthor);
+      $("tbody").append(tdPubDate);
+    }
   });
 })
-// $("tbody").append("<tr><td>" +  + "</td><td>" +  + "</td><td>" +  + "</td><td>" +  + "</td><td>" +  + "</td><>tr>");

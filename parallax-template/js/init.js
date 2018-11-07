@@ -84,7 +84,7 @@ $("#submitBtn").on("click", function (event) {
   })
 
   //URLs to use in ajax calls
-  var dplaQueryURL = "https://api.dp.la/v2/items?sourceResource.type=text&sourceResource.format=%22Electronic+resource%22&sourceResource.title=" +
+  var dplaQueryURL = "https://api.dp.la/v2/items?sourceResource.type=text&sourceResource.format=%22Electronic+resource%22&hasView&sourceResource.title=" +
     searchTerm + " &api_key=464064d20cce9184e65cf353572713b5";
    
 
@@ -100,8 +100,48 @@ $("#submitBtn").on("click", function (event) {
     method: "GET"
   }).then(function (response) {
     var dplaResults = response;
-    console.log(response);
-    console.log(dplaResults);
+    // console.log(response);
+    // console.log(dplaResults);
+
+    
+    var results = dplaResults.docs;
+    for (var i = 0; i < results.length; i++) {
+      var newRow = $("<tr>");
+      console.log(results[i]);
+
+
+    var dplaCovers;
+
+    if (results[i].object) {
+      dplaCover = results[i].object;
+    } 
+    else {
+      dplaCover = "https://vignette.wikia.nocookie.net/darkseries/images/9/96/No_book_cover_lg.jpg/revision/latest?cb=20170826200421";
+    }
+
+    var tdCover = $("<img>").attr("src", dplaCover).css({"width": "150px", "height": "200px"});
+      newRow.append(tdCover);
+
+    var dplaTitle = results[i].sourceResource.title;
+    var tdTitle = $("<td>").text(dplaTitle);
+    newRow.append(tdTitle);
+
+    var dplaAuthor = results[i].sourceResource.creator;
+    var tdAuthor = $("<td>").text(dplaAuthor);
+    newRow.append(tdAuthor);
+
+    var dplaPubDate = results[i].sourceResource.date.begin;
+    var tdPubDate = $("<td>").text(dplaPubDate);
+    newRow.append(tdPubDate);
+
+    var dplaCollection = "Digital Public Library of America";
+    var tdCollection = $("<td>").text(dplaCollection);
+    newRow.append(tdCollection);
+
+
+    $("tbody").append(newRow);
+
+    } 
   });
 
   $.ajax({
@@ -112,6 +152,7 @@ $("#submitBtn").on("click", function (event) {
     console.log(JSON.parse(response));
     var parseResponse = JSON.parse(response);
     console.log(parseResponse.docs);
+
 
     var results = parseResponse.docs;
     for (var i = 0; i < results.length; i++) {
@@ -135,6 +176,10 @@ $("#submitBtn").on("click", function (event) {
       var tdPubDate = $("<td>").text(pubDate);
       console.log = ("pubDate", pubDate);
       newRow.append(tdPubDate);
+
+      var collection = "Open Library";
+      var tdCollection = $("<td>").text(collection);
+      newRow.append(tdCollection);
 
       $("tbody").append(newRow);
       $("tbody").append(tdCover);

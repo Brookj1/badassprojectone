@@ -47,16 +47,14 @@ var database = firebase.database();
 // // end drop downs
 
 //If/else statement that watches for a change in the "checked" property of the two checkboxes, that have the "filled in" class
-$(".filled-in").change(function () {
-  //var state = $(this).attr('data-state');  //this probably needs to change, it's the data state from giphy homework
-  if ($(this).prop('checked')) {
-    console.log("Checked Box Selected");
-  } else {
-    console.log("Checked Box Deselect");
-  }
-});
-
-
+// $(".filled-in").change(function () {
+//   //var state = $(this).attr('data-state');  //this probably needs to change, it's the data state from giphy homework
+//   if ($(this).prop('checked')) {
+//     console.log("Checked Box Selected");
+//   } else {
+//     console.log("Checked Box Deselect");
+//   }
+// });
 
 //event listener for when someone hits the submit button that run ajax calls and pushes information to database
 $("#submitBtn").on("click", function (event) {

@@ -47,8 +47,8 @@ var database = firebase.database();
 // // end drop downs
 
 // Testing the API calls
-// This one is for the LoC API, this test works but when we tested it with the click event, it threw an error - not sure why
-// var locQueryURL = "https://www.loc.gov/books/?q=" +
+// This one is for the loc API, this test works but when we tested it with the click event, it threw an error - not sure why
+// var dplaQueryURL = "https://www.loc.gov/books/?q=" +
 // "Gunslinger" + "&fo=json";
 
 // $.ajax({
@@ -84,8 +84,9 @@ $("#submitBtn").on("click", function (event) {
   })
 
   //URLs to use in ajax calls
-  var locQueryURL = "https://www.loc.gov/books/?q=" +
-    searchTerm + "&fo=json&c=10";
+  var dplaQueryURL = "https://api.dp.la/v2/items?sourceResource.type=text&sourceResource.format=%22Electronic+resource%22&sourceResource.title=" +
+    searchTerm + " &api_key=464064d20cce9184e65cf353572713b5";
+   
 
   var openQueryURL = "http://openlibrary.org/search.json?q=" +
     searchTerm + "&limit=10"
@@ -95,12 +96,12 @@ $("#submitBtn").on("click", function (event) {
 
   //ajax calls for each API and console logging results
   $.ajax({
-    url: locQueryURL,
+    url: dplaQueryURL,
     method: "GET"
   }).then(function (response) {
-    var locResults = response.featured_items;
+    var dplaResults = response;
     console.log(response);
-    console.log(locResults);
+    console.log(dplaResults);
   });
 
   $.ajax({

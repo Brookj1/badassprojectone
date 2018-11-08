@@ -59,7 +59,7 @@ var database = firebase.database();
 //event listener for when someone hits the submit button that run ajax calls and pushes information to database
 $("#submitBtn").on("click", function (event) {
   event.preventDefault();
-  $("tbody").val("");
+  $("tbody").empty();
 
   //pulls input from the search field and stores in a variable
   var searchTerm = $("#autocomplete-input").val().trim();
@@ -85,7 +85,7 @@ $("#submitBtn").on("click", function (event) {
       // console.log(JSON.parse(response));
       
       var parseResponse = JSON.parse(response);
-      console.log(parseResponse.docs);  
+      // console.log(parseResponse.docs);  
   
       var results = parseResponse.docs;
       for (var i = 0; i < results.length; i++) {
@@ -136,9 +136,9 @@ $("#submitBtn").on("click", function (event) {
       url: dplaQueryURL,
       method: "GET"
     }).then(function (response) {
-      console.log("This function worked");
+      // console.log("This function worked");
       var dplaResults = response;
-      console.log(response);
+      // console.log(response);
       // console.log(dplaResults);
 
       if (response.count === 0) {

@@ -42,7 +42,7 @@ $("#submitBtn").on("click", function (event) {
     //URLs to use in ajax calls
     var dplaQueryURL = "https://api.dp.la/v2/items?sourceResource.type=text&sourceResource.format=%22Electronic+resource%22&hasView&sourceResource.title=" + searchTerm + " &api_key=464064d20cce9184e65cf353572713b5";
 
-    var openQueryURL = "http://openlibrary.org/search.json?title=" + searchTerm + "&limit=10";
+    var openQueryURL = "https://openlibrary.org/search.json?title=" + searchTerm + "&limit=10";
 
     //function to run Open Library API call and populate
     function openLibAjax() {

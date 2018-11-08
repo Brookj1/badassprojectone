@@ -52,7 +52,6 @@
                 <div class="col s12 center">
                     <h3><i class="mdi-content-send brown-text"></i></h3>
                     <h4>Search Field</h4>
-                    <p class="light">Enter the search fields below.</p>
                 </div>
             </div>
         </div>
@@ -85,15 +84,15 @@
             <div class="row">
                 <div class="col s12">
                     <div class="row">
-                    <form id="searchForm" action="submit">
-                        <div class="input-field col s12 center">
-                            <i class="material-icons prefix">textsms</i>
-                            <input type="text" id="autocomplete-input" class="autocomplete">
-                            <label for="autocomplete-input">Keyword Search</label>
-                            <button class="btn waves-effect waves-light" id="submitBtn" type="submit" name="action">Submit
-                                <i class="material-icons right">send</i>
-                            </button>
-                        </div>
+                        <form id="searchForm" action="submit">
+                            <div class="input-field col s12 center">
+                                <i class="material-icons prefix">textsms</i>
+                                <input type="text" id="autocomplete-input" class="autocomplete">
+                                <label for="autocomplete-input">Title Search</label>
+                                <button class="btn waves-effect waves-light" id="submitBtn" type="submit" name="action">Submit
+                                    <i class="material-icons right">send</i>
+                                </button>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -107,16 +106,16 @@
                 <div class="col s12 center">
                     <h3><i class="mdi-content-send brown-text"></i></h3>
                     <h4>Search Information</h4>
+                    <div class="noResults"></div>
                     <p class="left-align light">
-                        <table class="table">
+                        <table class="centered highlight responsive-table">
                             <thead>
                                 <tr>
-                                    <!-- The scope attribute specifies that this is a header for a column -->
-                                    <th scope="col">Cover</th>
+                                    <!-- The scope attribute specifies that this is a header for a column -->                                    
                                     <th scope="col">Title</th>
                                     <th scope="col">Author</th>
-                                    <th scope="col">Publication Date(s)</th>
                                     <th scope="col">Library Collection</th>
+                                    <th scope="col">Cover</th>
                                 </tr>
                             </thead>
                             <tbody>

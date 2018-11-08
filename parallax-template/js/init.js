@@ -107,10 +107,10 @@ $("#submitBtn").on("click", function (event) {
     var results = dplaResults.docs;
     for (var i = 0; i < results.length; i++) {
       var newRow = $("<tr>");
-      console.log(results[i]);
+      // console.log(results[i]);
 
 
-    var dplaCovers;
+    var dplaCover;
 
     if (results[i].object) {
       dplaCover = results[i].object;
@@ -149,7 +149,7 @@ $("#submitBtn").on("click", function (event) {
     method: "GET"
   }).then(function (response) {
     // var openResults = response.data;
-    console.log(JSON.parse(response));
+    // console.log(JSON.parse(response));
     var parseResponse = JSON.parse(response);
     console.log(parseResponse.docs);
 
@@ -158,7 +158,16 @@ $("#submitBtn").on("click", function (event) {
     for (var i = 0; i < results.length; i++) {
       var newRow = $("<tr>")
 
-      var cover = "https://covers.openlibrary.org/b/olid/" + results[i].cover_edition_key + ".jpg";
+      var cover;
+
+    if (results[i].cover_edition_key) {
+      cover = "https://covers.openlibrary.org/b/olid/" + results[i].cover_edition_key + ".jpg";
+    } 
+    else {
+      cover = "https://vignette.wikia.nocookie.net/darkseries/images/9/96/No_book_cover_lg.jpg/revision/latest?cb=20170826200421";
+    }
+
+      // var cover = "https://covers.openlibrary.org/b/olid/" + results[i].cover_edition_key + ".jpg";
       var tdCover = $("<img>").attr("src", cover).css({"width": "150px", "height": "200px"});
       newRow.append(tdCover);
 
@@ -186,6 +195,7 @@ $("#submitBtn").on("click", function (event) {
       $("tbody").append(tdTitle);
       $("tbody").append(tdAuthor);
       $("tbody").append(tdPubDate);
+      $("tbody").append(tdCollection);
     }
   });
 })

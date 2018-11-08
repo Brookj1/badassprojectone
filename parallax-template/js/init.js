@@ -21,41 +21,6 @@ firebase.initializeApp(config);
 var database = firebase.database();
 // end firebase
 
-// // event listener for the drop down search options
-// document.addEventListener('DOMContentLoaded', function () {
-//   var elems = document.querySelectorAll('select');
-//   var instances = M.FormSelect.init(elems, options);
-// });
-
-// // Or with jQuery
-
-// $(document).ready(function () {
-//   $('select').formSelect();
-// });
-
-// var instance = M.FormSelect.getInstance(elem);
-
-// /* jQuery Method Calls
-//   You can still use the old jQuery plugin method calls.
-//   But you won't be able to access instance properties.
-
-//   $('select').formSelect('methodName');
-//   $('select').formSelect('methodName', paramName);
-// */
-
-// instance.getSelectedValues();
-// // end drop downs
-
-//If/else statement that watches for a change in the "checked" property of the two checkboxes, that have the "filled in" class
-// $(".filled-in").change(function () {
-//   //var state = $(this).attr('data-state');  //this probably needs to change, it's the data state from giphy homework
-//   if ($(this).prop('checked')) {
-//     console.log("Checked Box Selected");
-//   } else {
-//     console.log("Checked Box Deselect");
-//   }
-// });
-
 //event listener for when someone hits the submit button that run ajax calls and pushes information to database
 $("#submitBtn").on("click", function (event) {
   event.preventDefault();
@@ -121,11 +86,11 @@ $("#submitBtn").on("click", function (event) {
         newRow.append(tdCollection);
   
         $("tbody").append(newRow);
-        $("tbody").append(tdCover);
-        $("tbody").append(tdTitle);
-        $("tbody").append(tdAuthor);
-        $("tbody").append(tdPubDate);
-        $("tbody").append(tdCollection);
+        // $("tbody").append(tdCover);
+        // $("tbody").append(tdTitle);
+        // $("tbody").append(tdAuthor);
+        // $("tbody").append(tdPubDate);
+        // $("tbody").append(tdCollection);
       }
     });
   };

@@ -54,11 +54,11 @@ $("#submitBtn").on("click", function (event) {
         // console.log(JSON.parse(response));
 
         var parseResponse = JSON.parse(response);
-        // console.log(parseResponse.docs);  
+        console.log(parseResponse.docs);  
 
         var results = parseResponse.docs;
         for (var i = 0; i < results.length; i++) {
-          var newRow = $("<tr>");
+          var newRow = $("<tr href='https://openlibrary.org" + results[i].key + "'>");
           var cover;
 
           var title = results[i].title;
@@ -84,8 +84,8 @@ $("#submitBtn").on("click", function (event) {
           var tdCover = $("<img>").attr("src", cover).css({ "width": "150px", "height": "200px" });
           newRow.append(tdCover);
 
-          $("tbody").append(newRow);
-        }
+          $("tbody").prepend(newRow);
+        };
       });
     };
 
@@ -97,15 +97,14 @@ $("#submitBtn").on("click", function (event) {
       }).then(function (response) {
         // console.log("This function worked");
         var dplaResults = response;
-        // console.log(response);
-        // console.log(dplaResults);
+        console.log(dplaResults);
 
         if (response.count === 0) {
           $(".noResults").html("<p>No results found in Digital Public Library of America</p>").css({ "font-size": "18px" });
         } else {
           var results = dplaResults.docs;
           for (var i = 0; i < results.length; i++) {
-            var newRow = $("<tr>");
+            var newRow = $("<tr href='" + results[i].isShownAt + "'>");
             // console.log(results[i]);
 
             var dplaCover;
@@ -118,7 +117,7 @@ $("#submitBtn").on("click", function (event) {
               dplaCover = results[i].object;
             } else {
               dplaCover = "https://vignette.wikia.nocookie.net/darkseries/images/9/96/No_book_cover_lg.jpg/revision/latest?cb=20170826200421";
-            }
+            };
 
             var dplaAuthor = results[i].sourceResource.creator;
             var tdAuthor = $("<td>").text(dplaAuthor);
@@ -133,7 +132,7 @@ $("#submitBtn").on("click", function (event) {
 
             $("tbody").append(newRow);
           };
-        }
+        };
       });
     };
 
@@ -148,3 +147,8 @@ $("#submitBtn").on("click", function (event) {
     }
   }
 });
+
+$(document).on("click", "tr", function() {
+  window.open($(this).attr('href'));
+  return false;
+})

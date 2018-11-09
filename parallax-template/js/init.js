@@ -84,7 +84,7 @@ $("#submitBtn").on("click", function (event) {
           var tdCover = $("<img>").attr("src", cover).css({ "width": "150px", "height": "200px" });
           newRow.append(tdCover);
 
-          $("tbody").append(newRow);
+          $("tbody").prepend(newRow);
         }
       });
     };
